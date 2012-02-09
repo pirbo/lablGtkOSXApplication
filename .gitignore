@@ -1,21 +1,28 @@
-// emacs
-*~
-**\#*\#
+# mac
+.DS_Store
 
-// configure
+# emacs
+*~
+\#*\#
+
+# configure
 configure
 META
 Makefile
 src/Makefile
 example/info.plist
 
-// make
-*.o
-*.cm?[ioas]
-example/{_build,example.app}
+# make
+*.[oa]
+*.so
+*.cm[ioxa]
+*.cmx[as]
+example/_build/
+example/example.app/
+example/example.native
 
-// {proc,var}cc
+# {proc,var}cc
 *Props.ml
-*_var.c
+*_tags.[ch]
 *Enums.ml
 src/gtkOSXApplication.ml
