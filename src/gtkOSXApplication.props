@@ -1,0 +1,33 @@
+prefix "Gtk"
+
+header {
+  open GtkosxapplicationEnums
+}
+
+class OSXApplication type "[ `osxapplication ] obj" wrap : GObject {
+
+  signal NSApplicationBlockTerminaison
+  signal NSApplicationDidBecomeActive
+  signal NSApplicationOpenFile : string
+  signal NSApplicationWillResignActive
+
+  method ready
+  method cleanup
+  method set_use_quartz_accelerators : "bool -> unit"
+  method use_quartz_accelerators : "bool"
+  method set_menu_bar : "Gtk.menu_shell obj -> unit"
+  method sync_menubar
+(*  method add_app_menu_group : "osx_application_menu_group"
+  method add_app_menu_item : "osx_application_menu_group -> Gtk.menu_item obj -> unit" *)
+  method set_dock_menu : "Gtk.menu_shell obj -> unit"
+  method set_dock_icon_pixbuf : "GdkPixbuf.pixbuf -> unit"
+  method set_dock_icon_resource : "string -> string -> string -> unit"
+  method attention_request : "attention_type -> int"
+  method cancel_attention_request : "int -> unit"
+  method get_bundle_path : "string"
+  method get_resource_path : "string"
+  method get_executable_path : "string"
+  method get_bundle_id : "string"
+  method get_bundle_info : "string -> string"
+
+}

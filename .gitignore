@@ -1,0 +1,21 @@
+// emacs
+*~
+**\#*\#
+
+// configure
+configure
+META
+Makefile
+src/Makefile
+example/info.plist
+
+// make
+*.o
+*.cm?[ioas]
+example/{_build,example.app}
+
+// {proc,var}cc
+*Props.ml
+*_var.c
+*Enums.ml
+src/gtkOSXApplication.ml

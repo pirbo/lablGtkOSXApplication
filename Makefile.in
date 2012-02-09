@@ -1,0 +1,27 @@
+.DEFAULT_GOAL:=all
+
+.PHONY: clean distclean all
+
+example/example.native: src/@PACKAGE_NAME@.cmxa
+	cd $(dir $@); @OCAMLBUILD@ -use-ocamlfind -package @OCAML_PKG_lablgtk2@ -lib $(shell pwd)/$(basename $<) -lflags -cclib,-L$(dir $(shell pwd)/$<) $(notdir $@)
+
+example/example.app: example/example.native example/info.plist
+	rm -rf $@
+	mkdir -p $@/Contents/MacOS
+	cp example/example.native $@/Contents/MacOS
+	cp example/info.plist $@/Contents
+
+src/@PACKAGE_NAME@.cmxa:
+	+${MAKE} -C src/ $(notdir $@)
+
+all: src/@PACKAGE_NAME@.cmxa example/example.app
+
+clean:
+	find . -name \*~ -delete
+	+${MAKE} -C src/ clean
+	cd example; @OCAMLBUILD@ -clean
+	rm -rf example/example.app
+
+
+distclean:
+	rm -f META {,src/}Makefile example/info.plist

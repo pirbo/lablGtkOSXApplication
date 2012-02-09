@@ -1,0 +1,4 @@
+package "gtkosxapplication"
+
+type attention_type = ""
+ [ `CRITICAL_REQUEST | `INFO_REQUEST ]
