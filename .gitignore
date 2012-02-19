@@ -20,9 +20,10 @@ example/info.plist
 example/_build/
 example/example.app/
 example/example.native
+depends
 
 # {proc,var}cc
 *Props.ml
+*Props.ml.old
 *_tags.[ch]
 *Enums.ml
-src/gtkOSXApplication.ml

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CFBundleSignature</key>
+	<string>EMGC</string>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>en</string>
+	<key>CFBundlePackageType</key>
+	<string>APPL</string>
+	<key>CFBundleIdentifier</key>
+	<string>org.ocamlforge.lablgtkosx.example</string>
+	<key>CFBundleExecutable</key>
+	<string>example.native</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundleName</key>
+	<string>@PACKAGE_NAME@-example</string>
+	<key>CFBundleDisplayName</key>
+	<string>LablGtkOSX Example</string>
+	<key>CFBundleVersion</key>
+	<string> @VERSION@</string>
+	<key>CFBundleShortVersionString</key>
+	<string>@VERSION@</string>
+	<key>CFBundleGetInfoString</key>
+	<string>This is an example of LablGtkOSX possibilities</string>
+	<key>NSHumanReadableCopyright</key>
+	<string>Pierre Boutilier LGPL v2</string>
+</dict>
+</plist>

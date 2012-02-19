@@ -1,20 +1,23 @@
 OCAMLFIND = @OCAMLFIND@
 
-.DEFAULT_GOAL: all
+MLFILES=gtkosxapplicationEnums.ml $(foreach c,OSXApplication, gtk$(c)Props.ml ogtk$(c)Props.ml gtk$(c).ml g$(c).ml)
+FILES= ml_gtkosxapplication.o $(MLFILES:.ml=.cmo) $(MLFILES:.ml=.cmx)
 
-FILES= ml_gtkosxapplication.o gtkOSXApplication.cmx
+.DEFAULT_GOAL:=all
+.SECONDARY: $(MLFILES) depends
 
+depends: $(MLFILES)
+	$(OCAMLFIND) ocamldep -package @OCAML_PKG_lablgtk2@ $^ > $@
+
+-include depends
 ml_gtkosxapplication.o: gtkosxapplication_tags.h
-gtkOSXApplication.cmx: gtkosxapplicationEnums.cmx
 
 %_tags.c %_tags.h %Enums.ml: %_tags.var
 	cd $(dir $<); $(shell $(OCAMLFIND) query @OCAML_PKG_lablgtk2@)/varcc $(notdir $<)
 
-%Props.ml: %.props
+%Props.ml o%Props.ml: %.props
 	cd $(dir $@); $(shell $(OCAMLFIND) query @OCAML_PKG_lablgtk2@)/propcc $(notdir $<)
-
-%.ml: %Props.ml
-	sed -e "s/gtk_osx_application/gtk_osxapplication/g" $< > $@
+	sed -i .old -e "s/gtk_osx_application/gtk_osxapplication/g" $@
 
 %.cmi: %.mli
 	$(OCAMLFIND) opt -package @OCAML_PKG_lablgtk2@ -c $<
@@ -22,16 +25,19 @@ gtkOSXApplication.cmx: gtkosxapplicationEnums.cmx
 %.o %.cmx %.cmi: %.ml
 	$(OCAMLFIND) opt -package @OCAML_PKG_lablgtk2@ -c $<
 
+%.cmo %.cmi: %.ml
+	$(OCAMLFIND) ocamlc -package @OCAML_PKG_lablgtk2@ -c $<
+
 %.o: %.c
 	$(OCAMLFIND) opt -package @OCAML_PKG_lablgtk2@ -ccopt "@GTKOSX_CFLAGS@" -c $<
 
-@PACKAGE_NAME@.cmxa lib@PACKAGE_NAME@.a dll@PACKAGE_NAME@.so @PACKAGE_NAME@.a: $(FILES)
+@PACKAGE_NAME@.cmxa @PACKAGE_NAME@.cma lib@PACKAGE_NAME@.a dll@PACKAGE_NAME@.so @PACKAGE_NAME@.a: $(FILES)
 	@OCAMLMKLIB@ @GTKOSX_LIBS@ -o $(basename $@) $^
 
-all: @PACKAGE_NAME@.cmxa
+all: @PACKAGE_NAME@.cmxa @PACKAGE_NAME@.cma
 
 clean:
-	rm -f *_tags.{c,h} *.o *Props.ml *.cm{i,o,a,x{,?}} *Enums.ml *.a *.so
-	rm -f gtkOSXApplication.ml @PACKAGE_NAME@.cmxa
+	rm -f *_tags.{c,h} *.o *Props.ml{,.old} *.cm{i,o,a,x{,?}} *Enums.ml *.a *.so depends
+	rm -f @PACKAGE_NAME@.cm?a
 
 PHONY: clean all

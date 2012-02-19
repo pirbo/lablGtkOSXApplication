@@ -13,6 +13,12 @@
 #include "gtkosxapplication_tags.h"
 #include "gtkosxapplication_tags.c"
 
+CAMLprim value ml_gtk_osxapplication_init(value unit)
+{       /* Since these are declared const, must force gcc to call them! */
+  GType t = gtk_osxapplication_get_type();
+  return Val_GType(t);
+}
+
 ML_1 (gtk_osxapplication_ready, GtkOSXApplication_val, Unit)
 ML_1 (gtk_osxapplication_cleanup, GtkOSXApplication_val, Unit)
 

@@ -4,7 +4,7 @@ header {
   open GtkosxapplicationEnums
 }
 
-class OSXApplication type "[ `osxapplication ] obj" wrap : GObject {
+class OSXApplication type "[ `osxapplication ] obj": GObject {
 
   signal NSApplicationBlockTerminaison
   signal NSApplicationDidBecomeActive
