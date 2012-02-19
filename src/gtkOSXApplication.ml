@@ -8,12 +8,12 @@ module OSXApplication = OSXApplication
 class virtual osx_application_sigs = object (self)
   method private virtual connect :
     'b. ('a,'b) GtkSignal.t -> callback:'b -> GtkSignal.id
-  method nsApplicationBlockTerminaison =
-    self#connect OSXApplication.S.ns_application_block_terminaison
-  method nsApplicationDidBecomeActive =
+  method ns_application_block_termination =
+    self#connect OSXApplication.S.ns_application_block_termination
+  method ns_application_did_become_active =
     self#connect OSXApplication.S.ns_application_did_become_active
-  method nsApplicationOpenFile =
+  method ns_application_open_file =
     self#connect OSXApplication.S.ns_application_open_file
-  method nsApplicationWillResignActive =
+  method ns_application_will_resign_active =
     self#connect OSXApplication.S.ns_application_will_resign_active
 end

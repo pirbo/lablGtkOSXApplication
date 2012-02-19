@@ -6,7 +6,7 @@ header {
 
 class OSXApplication type "[ `osxapplication ] obj": GObject {
 
-  signal NSApplicationBlockTerminaison
+  signal NSApplicationBlockTermination
   signal NSApplicationDidBecomeActive
   signal NSApplicationOpenFile : string
   signal NSApplicationWillResignActive
