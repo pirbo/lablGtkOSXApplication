@@ -1,5 +1,7 @@
 AC_INIT(lablgtkosx,1dev)
 
+AC_PROG_CC
+
 AC_CONFIG_MACRO_DIR(m4)
 
 AC_CONFIG_SRCDIR(src/ml_gtkosxapplication.c)

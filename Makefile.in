@@ -1,6 +1,6 @@
 .DEFAULT_GOAL:=all
 
-.PHONY: clean distclean all src/@PACKAGE_NAME@.cmxa
+.PHONY: clean distclean all src/@PACKAGE_NAME@.cmxa install
 
 example/example.native: src/@PACKAGE_NAME@.cmxa example/example.ml
 	cd $(dir $@); @OCAMLBUILD@ -use-ocamlfind -package @OCAML_PKG_lablgtk2@ -lib $(shell pwd)/$(basename $<) -lflags -cclib,-L$(dir $(shell pwd)/$<) -cflags -I,$(dir $(shell pwd)/$<) $(notdir $@)
@@ -13,6 +13,9 @@ example/example.app: example/example.native example/info.plist
 
 src/@PACKAGE_NAME@.cmxa:
 	+${MAKE} -C src/ $(notdir $@)
+
+install:
+	@echo "The meta file is not ready yet."
 
 all: src/@PACKAGE_NAME@.cmxa example/example.app
 

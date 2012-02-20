@@ -1,0 +1,32 @@
+			      LablGtkOSXApplication
+
+The goal of this library is provide the OSXApplication object of
+gtk-mac-integration[1] in Ocaml.
+
+It has been done using
+ - findlib 1.27
+ - lablgtk2 2.14.2
+ - gtk-osx-integration 1.0.1 (build by jhbuild)
+
+The configure generation involves
+ - ocaml-autoconf 1.1
+ - pkg-config m4 files
+ - autotools given by the bootstrap module of jhbuild
+but the author did not take the time to learn how to use these tools so:
+ - autoreconf does not work on its machine
+ - the generated configure deals with --prefix --bindir --...dir whereas this is
+ ocamlfind that will choose the "install" place.
+Tell him is something is missing/should not be in the depository and/or if you
+have clue to make a better configure.
+
+While you've succeed to get a configure script, "./configure; make; open
+example/example.app; make install" (probably, last command as super user) should
+do the job.
+
+You may have a look at src/gOSXApplication.mli and example/example.ml to learn how
+to take advantage of the library that is the ocamlfind package "lablgtkosx" if
+everything went well...
+
+Feel free to contact pierre.boutillier@laposte.net if you need to.
+
+[1] http://live.gnome.org/GTK%2B/OSX/Integration
