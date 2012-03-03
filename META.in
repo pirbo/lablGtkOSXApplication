@@ -1,1 +1,6 @@
-version = @PACKAGE_VERSION@
+description = "Binding of GtkOSXApplication on top of LablGtk2"
+requires = " @OCAML_PKG_lablgtk2@"
+version = "@PACKAGE_VERSION@"
+
+archive(byte) = "@PACKAGE_VERSION@.cmxa"
+archive(native) = "@PACKAGE_VERSION@.cma"

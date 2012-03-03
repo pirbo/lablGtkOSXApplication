@@ -15,7 +15,7 @@ src/@PACKAGE_NAME@.cmxa:
 	+${MAKE} -C src/ $(notdir $@)
 
 install:
-	@echo "The meta file is not ready yet."
+	@OCAMLFIND@ install @PACKAGE_NAME@ META src/*.mli src/@PACKAGE_NAME@.cm{,x}a src/dll@PACKAGE_NAME@.so src/gOSXApplication.cmi
 
 all: src/@PACKAGE_NAME@.cmxa example/example.app
 
