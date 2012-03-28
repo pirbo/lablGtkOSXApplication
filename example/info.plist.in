@@ -19,9 +19,9 @@
 	<key>CFBundleDisplayName</key>
 	<string>LablGtkOSX Example</string>
 	<key>CFBundleVersion</key>
-	<string> @VERSION@</string>
+	<string>@PACKAGE_VERSION@</string>
 	<key>CFBundleShortVersionString</key>
-	<string>@VERSION@</string>
+	<string>@PACKAGE_VERSION@</string>
 	<key>CFBundleGetInfoString</key>
 	<string>This is an example of LablGtkOSX possibilities</string>
 	<key>NSHumanReadableCopyright</key>
