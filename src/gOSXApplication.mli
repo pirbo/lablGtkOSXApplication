@@ -46,8 +46,8 @@ class osxapplication :
     method resource_path : unit -> string
     method set_dock_icon_pixbuf : GdkPixbuf.pixbuf -> unit
     method set_dock_icon_resource : string -> string -> string -> unit
-    method set_dock_menu : Gtk.menu_shell Gobject.obj -> unit
-    method set_menu_bar : Gtk.menu_shell Gobject.obj -> unit
+    method set_dock_menu : GMenu.menu_shell -> unit
+    method set_menu_bar : GMenu.menu_shell -> unit
     method set_use_quartz_accelerators : bool -> unit
     method sync_menubar : unit -> unit
     method use_quartz_accelerators : unit -> bool
