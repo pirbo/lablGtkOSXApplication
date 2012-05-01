@@ -30,6 +30,8 @@ class osx_application_signals :
       callback:(string -> unit) -> GtkSignal.id
     method ns_application_will_resign_active :
       callback:(unit -> unit) -> GtkSignal.id
+    method ns_application_will_terminate :
+      callback:(unit -> unit) -> GtkSignal.id
   end
 class osxapplication :
   [ `osxapplication ] Gobject.obj ->
@@ -47,9 +49,11 @@ class osxapplication :
     method set_dock_icon_pixbuf : GdkPixbuf.pixbuf -> unit
     method set_dock_icon_resource : string -> string -> string -> unit
     method set_dock_menu : GMenu.menu_shell -> unit
+    method set_help_menu : ?item:GMenu.menu_item -> unit -> unit
+    method set_window_menu : ?item:GMenu.menu_item -> unit -> unit
     method set_menu_bar : GMenu.menu_shell -> unit
     method set_use_quartz_accelerators : bool -> unit
     method sync_menubar : unit -> unit
-    method use_quartz_accelerators : unit -> bool
+    method use_quartz_accelerators : bool
   end
 val osxapplication : unit -> osxapplication

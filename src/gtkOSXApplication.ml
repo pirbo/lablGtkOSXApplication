@@ -21,7 +21,19 @@ open GtkOSXApplicationProps
 external _gtk_osxapplication_init : unit -> unit = "ml_gtk_osxapplication_init"
 let () = _gtk_osxapplication_init ()
 
-module OSXApplication = OSXApplication
+module OSXApplication = struct
+  include OSXApplication
+  external get_bundle_path : unit -> string =
+    "ml_quartz_application_get_bundle_path"
+  external get_resource_path : unit -> string =
+    "ml_quartz_application_get_resource_path"
+  external get_executable_path : unit -> string =
+    "ml_quartz_application_get_executable_path"
+  external get_bundle_id : unit -> string =
+    "ml_quartz_application_get_bundle_id"
+  external get_bundle_info : string -> string =
+    "ml_quartz_application_get_bundle_info"
+end
 
 class virtual osx_application_sigs = object (self)
   method private virtual connect :
@@ -34,4 +46,6 @@ class virtual osx_application_sigs = object (self)
     self#connect OSXApplication.S.ns_application_open_file
   method ns_application_will_resign_active =
     self#connect OSXApplication.S.ns_application_will_resign_active
+  method ns_application_will_terminate =
+    self#connect OSXApplication.S.ns_application_will_terminate
 end

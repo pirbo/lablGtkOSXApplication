@@ -14,6 +14,14 @@ let info_menu osx label =
   let () = title#set_submenu menu in
   title
 
+let help_menu label =
+  let title = GMenu.menu_item ~label:"SOS" () in
+  let menu = GMenu.menu () in
+  let () = title#set_submenu menu in
+  let question = GMenu.menu_item ~label:"What's for ?" ~packing:menu#append () in
+  let _ = question#connect#activate (fun () -> label#set_text "Nothing !!!") in
+  title
+
 let themenus osx label =
   let bar = GMenu.menu_bar () in
   let play_title = GMenu.menu_item ~packing:bar#append ~label:"playground" () in
@@ -29,7 +37,12 @@ let () =
   let thebox = GPack.vbox ~packing:window#add () in
   let txt = GMisc.label ~text:"No info to show" ~packing:thebox#pack () in
   let status = GMisc.label ~text:"Lost in space" ~packing:thebox#pack () in
-  let () = osx#set_menu_bar (themenus osx txt) in
+  let menu_b = themenus osx txt in
+  let help_m = help_menu txt in
+  let () = menu_b#append help_m in
+  let () = osx#set_menu_bar (menu_b) in
+  let () = osx#set_help_menu ~item:help_m () in
+  let () = osx#set_window_menu () in
   let () = osx#ready () in
   let _ = osx#connect#ns_application_open_file ~callback:(fun thefile ->  txt#set_text thefile) in
   let _ = osx#connect#ns_application_did_become_active ~callback:(fun () -> status#set_text "On board") in

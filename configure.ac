@@ -19,7 +19,7 @@ fi
 
 AC_CHECK_OCAML_PKG(lablgtk2)
 
-PKG_CHECK_MODULES([GTKOSX],ige-mac-integration)
+PKG_CHECK_MODULES([GTKOSX],gtk-mac-integration)
 
 AC_COPYRIGHT([Pierre Boutillier 2012])
 AC_REVISION(1dev)
