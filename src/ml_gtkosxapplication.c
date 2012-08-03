@@ -17,9 +17,9 @@
 /* Boston, MA  02110-1301  USA */
 
 #include <gtk/gtk.h>
-#include <lablgtk2/wrappers.h>
-#include <lablgtk2/ml_gobject.h>
-#include <lablgtk2/ml_gdkpixbuf.h>
+#include <wrappers.h>
+#include <ml_gobject.h>
+#include <ml_gdkpixbuf.h>
 #include <gtkmacintegration/gtkosxapplication.h>
 
 // Copy/Paste of lablgtk2.14.2 that should be avoided

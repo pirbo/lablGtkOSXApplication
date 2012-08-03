@@ -4,8 +4,9 @@ The goal of this library is provide the OSXApplication object of
 gtk-mac-integration[1] in Ocaml.
 
 It has been done using
- - findlib 1.27
- - lablgtk2 2.14.2
+ - Ocaml 4.0
+ - findlib 1.33
+ - lablgtk2 2.16.0
  - gtk-osx-integration 1.0.1 (build by jhbuild)
 
 The configure generation involves
@@ -16,8 +17,8 @@ but the author did not take the time to learn how to use these tools so:
  - autoreconf does not work on its machine
  - the generated configure deals with --prefix --bindir --...dir whereas this is
  ocamlfind that will choose the "install" place.
-Tell him is something is missing/should not be in the depository and/or if you
-have clue to make a better configure.
+Tell him if something is missing/should not be in the depository and/or if you
+have clue to make a better configure process.
 
 While you've succeed to get a configure script, "./configure; make; open
 example/example.app; make install" (probably, last command as super user) should

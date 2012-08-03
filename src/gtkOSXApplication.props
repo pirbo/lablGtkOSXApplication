@@ -4,7 +4,7 @@ header {
   open GtkosxapplicationEnums
 }
 
-class OSXApplication type "[ `osxapplication ] obj" set wrap: GObject {
+class OSXApplication type "[ `osxapplication ] obj" wrap: GObject {
  "use_quartz_accelerators" gboolean : Read / Write
 
   signal NSApplicationBlockTermination

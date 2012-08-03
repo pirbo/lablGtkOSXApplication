@@ -32,7 +32,7 @@ ml_gtkosxapplication.o: gtkosxapplication_tags.h
 	$(OCAMLFIND) opt -package @OCAML_PKG_lablgtk2@ -ccopt "@GTKOSX_CFLAGS@" -c $<
 
 @PACKAGE_NAME@.cmxa @PACKAGE_NAME@.cma lib@PACKAGE_NAME@.a dll@PACKAGE_NAME@.so @PACKAGE_NAME@.a: $(FILES)
-	@OCAMLMKLIB@ @GTKOSX_LIBS@ -o $(basename $@) $^
+	$(OCAMLFIND) ocamlmklib @GTKOSX_LIBS@ -o $(basename $@) $^
 
 all: @PACKAGE_NAME@.cmxa @PACKAGE_NAME@.cma
 
