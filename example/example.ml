@@ -30,6 +30,19 @@ let themenus osx label =
   let () = play_title#set_submenu play in
   bar
 
+let att_req = ref None
+
+let get_attention osx () =
+  let () = Glib.usleep 5000000 in
+  att_req := Some (osx#attention_request `CRITICAL_REQUEST)
+
+let drop_attention osx () =
+  match !att_req with
+    | None -> ()
+    | Some id ->
+      let () = osx#cancel_attention_request id in
+      att_req := None
+
 let () =
   let locale = GtkMain.Main.init () in
   let osx = GOSXApplication.osxapplication () in
@@ -45,8 +58,8 @@ let () =
   let () = osx#set_window_menu () in
   let () = osx#ready () in
   let _ = osx#connect#ns_application_open_file ~callback:(fun thefile ->  txt#set_text thefile) in
-  let _ = osx#connect#ns_application_did_become_active ~callback:(fun () -> status#set_text "On board") in
-  let _ = osx#connect#ns_application_will_resign_active ~callback:(fun () -> status#set_text "Somewhere in the back") in
+  let _ = osx#connect#ns_application_did_become_active ~callback:(drop_attention osx) in
+  let _ = osx#connect#ns_application_will_resign_active ~callback:(get_attention osx) in
   let _ = osx#connect#ns_application_block_termination ~callback:(fun _ -> Format.printf "Bye\n%!") in
   let _ = window#connect#destroy ~callback:(fun () -> GMain.Main.quit ()) in
   let () = window#show () in
