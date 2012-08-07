@@ -19,12 +19,16 @@ install:
 
 all: src/@PACKAGE_NAME@.cmxa example/example.app
 
+html: $(wildcard src/*.mli) $(wildcard src/*Enums.ml)
+	rm -rf html && mkdir html
+	@OCAMLFIND@ ocamldoc -I src -package @OCAML_PKG_lablgtk2@ -d $@ -html $^
+
 clean:
 	find . -name \*~ -delete
 	+${MAKE} -C src/ clean
 	cd example; @OCAMLBUILD@ -clean
 	rm -rf example/example.app
-
+	rm -rf html
 
 distclean:
-	rm -f META {,src/}Makefile example/info.plist
+	rm -f META {,src/}Makefile example/info.plist config.{log,status}
