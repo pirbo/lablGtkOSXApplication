@@ -1,43 +1,34 @@
-OCAMLFIND = @OCAMLFIND@
+INCFLAGS=$(patsubst %,-I %,$(subst :, ,$(VPATH))) -package @OCAML_PKG_lablgtk2@
 
 MLFILES=gtkosxapplicationEnums.ml $(foreach c,OSXApplication, gtk$(c)Props.ml ogtk$(c)Props.ml gtk$(c).ml g$(c).ml)
 FILES= ml_gtkosxapplication.o $(MLFILES:.ml=.cmo) $(MLFILES:.ml=.cmx)
 
-.DEFAULT_GOAL:=all
 .SECONDARY: $(MLFILES) depends
 
 depends: $(MLFILES)
-	$(OCAMLFIND) ocamldep -package @OCAML_PKG_lablgtk2@ $^ > $@
+	$(OCAMLFIND) ocamldep $(INCFLAGS) $^ > $@
 
 -include depends
 ml_gtkosxapplication.o: gtkosxapplication_tags.h
 
 %_tags.c %_tags.h %Enums.ml: %_tags.var
-	cd $(dir $<); $(shell $(OCAMLFIND) query @OCAML_PKG_lablgtk2@)/varcc $(notdir $<)
+	cd $(dir $<) && $(shell $(OCAMLFIND) query @OCAML_PKG_lablgtk2@)/varcc $(notdir $<)
 
-%Props.ml o%Props.ml: %.props
-	cd $(dir $@); $(shell $(OCAMLFIND) query @OCAML_PKG_lablgtk2@)/propcc $(notdir $<)
-	sed -i .old -e "s/gtk_osx_application/gtk_osxapplication/g" $@
+%Props.ml $(dir %)o$(notdir %)Props.ml: %.props
+	cd $(dir $<) && $(shell $(OCAMLFIND) query @OCAML_PKG_lablgtk2@)/propcc $(notdir $<) && \
+	sed -i .old -e "s/gtk_osx_application/gtk_osxapplication/g" $(notdir $@)
 
 %.cmi: %.mli
-	$(OCAMLFIND) opt -package @OCAML_PKG_lablgtk2@ -c $<
+	$(OCAMLFIND) opt $(INCFLAGS) -c $<
 
 %.o %.cmx %.cmi: %.ml
-	$(OCAMLFIND) opt -package @OCAML_PKG_lablgtk2@ -c $<
+	$(OCAMLFIND) opt $(INCFLAGS) -c $<
 
 %.cmo %.cmi: %.ml
-	$(OCAMLFIND) ocamlc -package @OCAML_PKG_lablgtk2@ -c $<
+	$(OCAMLFIND) ocamlc $(INCFLAGS) -c $<
 
 %.o: %.c
-	$(OCAMLFIND) opt -package @OCAML_PKG_lablgtk2@ -ccopt "@GTKOSX_CFLAGS@" -c $<
+	$(OCAMLFIND) opt $(INCFLAGS) -ccopt "@GTKOSX_CFLAGS@" -c $<
 
 @PACKAGE_NAME@.cmxa @PACKAGE_NAME@.cma lib@PACKAGE_NAME@.a dll@PACKAGE_NAME@.so @PACKAGE_NAME@.a: $(FILES)
-	$(OCAMLFIND) ocamlmklib @GTKOSX_LIBS@ -o $(basename $@) $^
-
-all: @PACKAGE_NAME@.cmxa @PACKAGE_NAME@.cma
-
-clean:
-	rm -f *_tags.{c,h} *.o *Props.ml{,.old} *.cm{i,o,a,x{,?}} *Enums.ml *.a *.so depends
-	rm -f @PACKAGE_NAME@.cm?a
-
-PHONY: clean all
+	$(OCAMLFIND) ocamlmklib $(INCFLAGS) @GTKOSX_LIBS@ -o $(basename $@) $^

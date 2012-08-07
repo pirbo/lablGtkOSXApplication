@@ -1,9 +1,18 @@
+OCAMLFIND := @OCAMLFIND@
+
 .DEFAULT_GOAL:=all
 
-.PHONY: clean distclean all src/@PACKAGE_NAME@.cmxa install
+VPATH:=src
 
-example/example.native: src/@PACKAGE_NAME@.cmxa example/example.ml
-	cd $(dir $@); @OCAMLBUILD@ -use-ocamlfind -package @OCAML_PKG_lablgtk2@ -lib $(shell pwd)/$(basename $<) -lflags -cclib,-L$(dir $(shell pwd)/$<) -cflags -I,$(dir $(shell pwd)/$<) $(notdir $@)
+MLIFILES=$(wildcard src/*.mli)
+
+include src/Makefile
+
+.PHONY: clean distclean all install
+
+example/example.native: @PACKAGE_NAME@.cmxa example/example.ml
+	cd $(dir $@) && \
+	@OCAMLBUILD@ -use-ocamlfind -package @OCAML_PKG_lablgtk2@ -lib $(shell pwd)/$(basename $<) -lflags -cclib,-L$(shell pwd) -cflags -I,$(shell pwd)/src $(notdir $@)
 
 example/example.app: example/example.native example/info.plist
 	rm -rf $@
@@ -11,22 +20,20 @@ example/example.app: example/example.native example/info.plist
 	cp example/example.native $@/Contents/MacOS
 	cp example/info.plist $@/Contents
 
-src/@PACKAGE_NAME@.cmxa:
-	+${MAKE} -C src/ $(notdir $@)
-
 install:
-	@OCAMLFIND@ install @PACKAGE_NAME@ META src/*.mli src/@PACKAGE_NAME@.cm{,x}a src/dll@PACKAGE_NAME@.so src/gOSXApplication.cmi
+	$(OCAMLFIND) install @PACKAGE_NAME@ META $(MLIFILES:.mli=.cmi) $(MLIFILES) @PACKAGE_NAME@.cm{,x}a dll@PACKAGE_NAME@.so
 
-all: src/@PACKAGE_NAME@.cmxa example/example.app
+all: @PACKAGE_NAME@.cmxa @PACKAGE_NAME@.cma example/example.app
 
-html: $(wildcard src/*.mli) $(wildcard src/*Enums.ml)
+html: $(wildcard src/*.mli) $(wildcard src/*Enums.ml) | @PACKAGE_NAME@.cmxa
 	rm -rf html && mkdir html
-	@OCAMLFIND@ ocamldoc -I src -package @OCAML_PKG_lablgtk2@ -d $@ -html $^
+	$(OCAMLFIND) ocamldoc -I src -package @OCAML_PKG_lablgtk2@ -d $@ -html $^
 
 clean:
 	find . -name \*~ -delete
-	+${MAKE} -C src/ clean
-	cd example; @OCAMLBUILD@ -clean
+	cd src && rm -f *_tags.{c,h} *.o *Props.ml{,.old} *.cm{i,o,x} *Enums.ml
+	rm -f *.o *.{cm{x,},}a *.so depends
+	cd example && @OCAMLBUILD@ -clean; rm -f example.native
 	rm -rf example/example.app
 	rm -rf html
 
