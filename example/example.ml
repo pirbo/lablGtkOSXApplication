@@ -44,12 +44,11 @@ let drop_attention osx () =
       att_req := None
 
 let () =
-  let locale = GtkMain.Main.init () in
+  let _ = GtkMain.Main.init () in
   let osx = GOSXApplication.osxapplication () in
   let window = GWindow.window ~title:"The example" ~width:300 ~height:200 () in
   let thebox = GPack.vbox ~packing:window#add () in
   let txt = GMisc.label ~text:"No info to show" ~packing:thebox#pack () in
-  let status = GMisc.label ~text:"Lost in space" ~packing:thebox#pack () in
   let menu_b = themenus osx txt in
   let help_m = help_menu txt in
   let () = menu_b#append help_m in
@@ -57,10 +56,10 @@ let () =
   let () = osx#set_help_menu ~item:help_m () in
   let () = osx#set_window_menu () in
   let () = osx#ready () in
-  let _ = osx#connect#ns_application_open_file ~callback:(fun thefile ->  txt#set_text thefile) in
+  let _ = osx#connect#ns_application_open_file ~callback:(fun thefile -> let () = txt#set_text thefile in true) in
   let _ = osx#connect#ns_application_did_become_active ~callback:(drop_attention osx) in
   let _ = osx#connect#ns_application_will_resign_active ~callback:(get_attention osx) in
-  let _ = osx#connect#ns_application_block_termination ~callback:(fun _ -> Format.printf "Bye\n%!") in
+  let _ = osx#connect#ns_application_block_termination ~callback:(fun _ -> let () = Format.printf "Bye\n%!" in false) in
   let _ = window#connect#destroy ~callback:(fun () -> GMain.Main.quit ()) in
   let () = window#show () in
   GMain.Main.main ()

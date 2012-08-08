@@ -23,11 +23,11 @@ class osx_application_signals :
       'a.
         ([ `osxapplication ], 'a) GtkSignal.t -> callback:'a -> GtkSignal.id
     method ns_application_block_termination :
-      callback:(unit -> unit) -> GtkSignal.id
+      callback:(unit -> bool) -> GtkSignal.id
     method ns_application_did_become_active :
       callback:(unit -> unit) -> GtkSignal.id
     method ns_application_open_file :
-      callback:(string -> unit) -> GtkSignal.id
+      callback:(string -> bool) -> GtkSignal.id
     method ns_application_will_resign_active :
       callback:(unit -> unit) -> GtkSignal.id
     method ns_application_will_terminate :

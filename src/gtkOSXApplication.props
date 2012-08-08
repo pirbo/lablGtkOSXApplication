@@ -7,9 +7,9 @@ header {
 class OSXApplication type "[ `osxapplication ] obj" wrap: GObject {
  "use_quartz_accelerators" gboolean : Read / Write
 
-  signal NSApplicationBlockTermination
+  signal NSApplicationBlockTermination : -> bool
   signal NSApplicationDidBecomeActive
-  signal NSApplicationOpenFile : string
+  signal NSApplicationOpenFile : string -> bool
   signal NSApplicationWillResignActive
   signal NSApplicationWillTerminate
 
