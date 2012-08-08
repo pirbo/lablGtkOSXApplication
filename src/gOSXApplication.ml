@@ -36,9 +36,9 @@ class osxapplication obj = object
  (match item with None -> None | Some x -> Some x#as_item)
   method set_window_menu ?(item : GMenu.menu_item option) () = OSXApplication.set_window_menu obj
  (match item with None -> None | Some x -> Some x#as_item)
-  method set_menu_bar (ms: GMenu.menu_shell) = OSXApplication.set_menu_bar obj (Obj.magic ms#as_widget)
+  method set_menu_bar (ms: GMenu.menu_shell) = OSXApplication.set_menu_bar obj (Gobject.try_cast ms#as_widget "GtkMenuShell")
   method sync_menubar () = OSXApplication.sync_menubar obj
-  method set_dock_menu (ms: GMenu.menu_shell) = OSXApplication.set_dock_menu obj (Obj.magic ms#as_widget)
+  method set_dock_menu (ms: GMenu.menu_shell) = OSXApplication.set_dock_menu obj (Gobject.try_cast ms#as_widget "GtkMenuShell")
   method set_dock_icon_pixbuf = OSXApplication.set_dock_icon_pixbuf obj
   method set_dock_icon_resource = OSXApplication.set_dock_icon_resource obj
   method attention_request = OSXApplication.attention_request obj
