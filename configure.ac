@@ -1,4 +1,4 @@
-AC_INIT(lablgtkosx,1dev)
+AC_INIT(lablgtkosx,1.00)
 
 AC_PROG_CC
 
