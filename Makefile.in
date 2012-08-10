@@ -8,7 +8,7 @@ MLIFILES=$(wildcard src/*.mli)
 
 include src/Makefile
 
-.PHONY: clean distclean all install
+.PHONY: clean distclean all install lablgtkosx-@PACKAGE_VERSION@.tar.bz2
 
 example/example.native: @PACKAGE_NAME@.cmxa example/example.ml
 	cd $(dir $@) && \
@@ -32,10 +32,19 @@ html: $(wildcard src/*.mli) $(wildcard src/*Enums.ml) | @PACKAGE_NAME@.cmxa
 clean:
 	find . -name \*~ -delete
 	cd src && rm -f *_tags.{c,h} *.o *Props.ml{,.old} *.cm{i,o,x} *Enums.ml
-	rm -f *.o *.{cm{x,},}a *.so depends
+	rm -f depends *.o *.{cm{x,},}a *.so
 	cd example && @OCAMLBUILD@ -clean; rm -f example.native
 	rm -rf example/example.app
 	rm -rf html
 
 distclean:
 	rm -f META {,src/}Makefile example/info.plist config.{log,status}
+	find . -name .DS_Store -delete
+
+DISTRDIR:=$(shell mktemp -d -t lablosx)
+
+lablgtkosx-@PACKAGE_VERSION@.tar.bz2:
+	cp -R ./ $(DISTRDIR)/$(basename $(basename $@))
+	+$(MAKE) -C$(DISTRDIR)/$(basename $(basename $@)) clean distclean
+	cd $(DISTRDIR)/$(basename $(basename $@)) && rm -rf .git*
+	tar -C $(DISTRDIR) -cjf $@ $(basename $(basename $@))
