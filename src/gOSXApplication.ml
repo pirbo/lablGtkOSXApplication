@@ -36,6 +36,7 @@ class osxapplication obj = object
  (match item with None -> None | Some x -> Some x#as_item)
   method set_window_menu ?(item : GMenu.menu_item option) () = OSXApplication.set_window_menu obj
  (match item with None -> None | Some x -> Some x#as_item)
+  method insert_app_menu_item (mi: GMenu.menu_item) = OSXApplication.insert_app_menu_item obj mi#as_widget
   method set_menu_bar (ms: GMenu.menu_shell) = OSXApplication.set_menu_bar obj (Gobject.try_cast ms#as_widget "GtkMenuShell")
   method sync_menubar () = OSXApplication.sync_menubar obj
   method set_dock_menu (ms: GMenu.menu_shell) = OSXApplication.set_dock_menu obj (Gobject.try_cast ms#as_widget "GtkMenuShell")

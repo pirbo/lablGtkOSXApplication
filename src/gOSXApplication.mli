@@ -44,6 +44,7 @@ class osxapplication :
     method cleanup : unit -> unit
     method connect : osx_application_signals
     method executable_path : unit -> string
+    method insert_app_menu_item : GMenu.menu_item -> int -> unit
     method ready : unit -> unit
     method resource_path : unit -> string
     method set_dock_icon_pixbuf : GdkPixbuf.pixbuf -> unit
