@@ -51,10 +51,13 @@ let () =
   let txt = GMisc.label ~text:"No info to show" ~packing:thebox#pack () in
   let menu_b = themenus osx txt in
   let help_m = help_menu txt in
+  let prefs = GMenu.menu_item ~label:"Preferences" () in
+  let _ = prefs#connect#activate (fun () -> txt#set_text "No prefs") in
   let () = menu_b#append help_m in
   let () = osx#set_menu_bar (menu_b) in
   let () = osx#set_help_menu ~item:help_m () in
   let () = osx#set_window_menu () in
+  let () = osx#insert_app_menu_item prefs 1 in
   let () = osx#ready () in
   let _ = osx#connect#ns_application_open_file ~callback:(fun thefile -> let () = txt#set_text thefile in true) in
   let _ = osx#connect#ns_application_did_become_active ~callback:(drop_attention osx) in
