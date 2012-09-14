@@ -29,6 +29,7 @@ class osxapplication obj = object
   val obj = obj
   inherit osx_application_props
 
+  method as_osxapplication = obj
   method connect = new osx_application_signals obj
   method ready () = OSXApplication.ready obj
   method cleanup () = OSXApplication.cleanup obj

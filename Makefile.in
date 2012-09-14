@@ -12,7 +12,9 @@ include src/Makefile
 
 example/example.native: @PACKAGE_NAME@.cmxa example/example.ml
 	cd $(dir $@) && \
-	@OCAMLBUILD@ -use-ocamlfind -package @OCAML_PKG_lablgtk2@ -lib $(shell pwd)/$(basename $<) -lflags -cclib,-L$(shell pwd) -cflags -I,$(shell pwd)/src $(notdir $@)
+	@OCAMLBUILD@ -use-ocamlfind -package @OCAML_PKG_lablgtk2@ -lib \
+	$(shell pwd)/$(basename $<) -lflags -cclib,-L$(shell pwd) -cflags \
+	-I,$(shell pwd)/src $(notdir $@)
 
 example/example.app: example/example.native example/info.plist
 	rm -rf $@
@@ -21,7 +23,8 @@ example/example.app: example/example.native example/info.plist
 	cp example/info.plist $@/Contents
 
 install:
-	$(OCAMLFIND) install @PACKAGE_NAME@ META $(MLIFILES:.mli=.cmi) $(MLIFILES) @PACKAGE_NAME@.cm{,x}a dll@PACKAGE_NAME@.so
+	$(OCAMLFIND) install @PACKAGE_NAME@ META $(wildcard src/*.cmi) $(MLIFILES) \
+	lib@PACKAGE_NAME@.a @PACKAGE_NAME@.{,cm{,x}}a dll@PACKAGE_NAME@.so
 
 all: @PACKAGE_NAME@.cmxa @PACKAGE_NAME@.cma example/example.app
 

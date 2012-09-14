@@ -36,6 +36,7 @@ class osx_application_signals :
 class osxapplication :
   [ `osxapplication ] Gobject.obj ->
   object
+    method as_osxapplication : [ `osxapplication ] Gobject.obj
     method attention_request : GtkosxapplicationEnums.attention_type -> int
     method bundle_id : unit -> string
     method bundle_info : string -> string
