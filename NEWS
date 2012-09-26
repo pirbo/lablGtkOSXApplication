@@ -1,3 +1,6 @@
+* version 1.02
+  ** correction META file
+
 * version 1.01
   ** Install puts all .cmi in order to access to low level functions.
   ** method add_app_menu_item was missing.
