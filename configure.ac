@@ -24,5 +24,5 @@ PKG_CHECK_MODULES([GTKOSX],gtk-mac-integration)
 AC_COPYRIGHT([Pierre Boutillier 2012])
 AC_REVISION(1.02)
 
-AC_CONFIG_FILES([Makefile src/Makefile example/info.plist META])
+AC_CONFIG_FILES([Makefile src/Makefile example/Info.plist META])
 AC_OUTPUT

@@ -16,11 +16,12 @@ example/example.native: @PACKAGE_NAME@.cmxa example/example.ml
 	$(shell pwd)/$(basename $<) -lflags -cclib,-L$(shell pwd) -cflags \
 	-I,$(shell pwd)/src $(notdir $@)
 
-example/example.app: example/example.native example/info.plist
+example/example.app: example/example.native example/Info.plist
 	rm -rf $@
 	mkdir -p $@/Contents/MacOS
 	cp example/example.native $@/Contents/MacOS
-	cp example/info.plist $@/Contents
+	cp example/Info.plist $@/Contents
+	codesign -s - $@
 
 install:
 	$(OCAMLFIND) install @PACKAGE_NAME@ META $(wildcard src/*.cmi) $(MLIFILES) \
@@ -41,7 +42,7 @@ clean:
 	rm -rf html
 
 distclean:
-	rm -f META {,src/}Makefile example/info.plist config.{log,status}
+	rm -f META {,src/}Makefile example/Info.plist config.{log,status}
 	find . -name .DS_Store -delete
 
 DISTRDIR:=$(shell mktemp -d -t lablosx)

@@ -10,7 +10,7 @@ configure
 META
 Makefile
 src/Makefile
-example/info.plist
+example/Info.plist
 config.log
 config.status
 

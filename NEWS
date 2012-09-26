@@ -1,5 +1,6 @@
 * version 1.02
-  ** correction META file
+  ** Correction META file
+  ** s/info.plist/Info.plist & code signing
 
 * version 1.01
   ** Install puts all .cmi in order to access to low level functions.
