@@ -52,3 +52,4 @@ class osxapplication obj = object
 end
 
 let osxapplication () = new osxapplication (Application.create [])
+let get_osxapplication () = new osxapplication (Application.get ())

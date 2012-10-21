@@ -16,6 +16,8 @@
 (* Foundation, Inc., 51 Franklin Street, Fifth Floor, *)
 (* Boston, MA  02110-1301  USA *)
 
+
+(** Gtk integration into MacOS *)
 class osxapplication_signals :
   [ `application ] Gobject.obj ->
   object
@@ -57,4 +59,9 @@ class osxapplication :
     method sync_menubar : unit -> unit
     method use_quartz_accelerators : bool
   end
+
+(** This creates a new object *)
 val osxapplication : unit -> osxapplication
+
+(** This create an instance from the already existing object *)
+val get_osxapplication : unit -> osxapplication

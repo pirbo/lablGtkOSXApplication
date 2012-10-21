@@ -23,6 +23,8 @@ let () = _gtkosx_application_init ()
 
 module Application = struct
   include Application
+  external get : unit -> [ `application ] Gobject.obj =
+    "ml_gtkosx_application_get"
   external get_bundle_path : unit -> string =
     "ml_gtkosx_application_get_bundle_path"
   external get_resource_path : unit -> string =
