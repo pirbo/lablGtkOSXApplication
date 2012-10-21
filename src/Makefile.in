@@ -1,6 +1,6 @@
 INCFLAGS=$(patsubst %,-I %,$(subst :, ,$(VPATH))) -package @OCAML_PKG_lablgtk2@
 
-MLFILES=gtkosxapplicationEnums.ml $(foreach c,OSXApplication, gtk$(c)Props.ml ogtk$(c)Props.ml gtk$(c).ml g$(c).ml)
+MLFILES=gtkosxapplicationEnums.ml $(foreach c,osxApplication, gtk$(c)Props.ml ogtk$(c)Props.ml gtk$(c).ml g$(c).ml)
 FILES= ml_gtkosxapplication.o $(MLFILES:.ml=.cmo) $(MLFILES:.ml=.cmx)
 
 .SECONDARY: $(MLFILES) depends
@@ -15,8 +15,7 @@ ml_gtkosxapplication.o: gtkosxapplication_tags.h
 	cd $(dir $<) && $(shell $(OCAMLFIND) query @OCAML_PKG_lablgtk2@)/varcc $(notdir $<)
 
 %Props.ml $(dir %)o$(notdir %)Props.ml: %.props
-	cd $(dir $<) && $(shell $(OCAMLFIND) query @OCAML_PKG_lablgtk2@)/propcc $(notdir $<) && \
-	sed -i .old -e "s/gtk_osx_application/gtk_osxapplication/g" $(notdir $@)
+	cd $(dir $<) && $(shell $(OCAMLFIND) query @OCAML_PKG_lablgtk2@)/propcc $(notdir $<)
 
 %.cmi: %.mli
 	$(OCAMLFIND) opt $(INCFLAGS) -c $<

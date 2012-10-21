@@ -28,33 +28,34 @@
 #define GtkMenuItem_val(val) check_cast(GTK_MENU_ITEM,val)
 // End of ToDrop part
 
-#define GtkOSXApplication_val(val) check_cast(GTK_OSX_APPLICATION,val)
+#define GtkosxApplication_val(val) check_cast(GTKOSX_APPLICATION,val)
+#define Val_gtkosxApplication(val) (Val_GObject((GObject*)val))
 
 #include "gtkosxapplication_tags.h"
 #include "gtkosxapplication_tags.c"
 
-CAMLprim value ml_gtk_osxapplication_init(value unit)
+CAMLprim value ml_gtkosx_application_init(value unit)
 {       /* Since these are declared const, must force gcc to call them! */
-  GType t = gtk_osxapplication_get_type();
+  GType t = gtkosx_application_get_type();
   return Val_GType(t);
 }
 
-ML_2 (gtk_osxapplication_attention_request, GtkOSXApplication_val, Attention_type_val, Val_int)
-ML_2 (gtk_osxapplication_cancel_attention_request, GtkOSXApplication_val, Int_val, Unit)
-ML_1 (gtk_osxapplication_cleanup, GtkOSXApplication_val, Unit)
-ML_3 (gtk_osxapplication_insert_app_menu_item, GtkOSXApplication_val, GtkWidget_val, Int_val, Unit)
-ML_1 (gtk_osxapplication_ready, GtkOSXApplication_val, Unit)
-ML_2 (gtk_osxapplication_set_dock_icon_pixbuf, GtkOSXApplication_val, GdkPixbuf_val, Unit)
-ML_4 (gtk_osxapplication_set_dock_icon_resource, GtkOSXApplication_val, String_val, String_val, String_val, Unit)
-ML_2 (gtk_osxapplication_set_dock_menu, GtkOSXApplication_val, GtkMenuShell_val, Unit)
-ML_2 (gtk_osxapplication_set_help_menu, GtkOSXApplication_val, Option_val(arg2,GtkMenuItem_val,NULL) Ignore, Unit)
-ML_2 (gtk_osxapplication_set_menu_bar, GtkOSXApplication_val, GtkMenuShell_val, Unit)
-ML_2 (gtk_osxapplication_set_use_quartz_accelerators, GtkOSXApplication_val, Bool_val, Unit)
-ML_2 (gtk_osxapplication_set_window_menu, GtkOSXApplication_val, Option_val(arg2,GtkMenuItem_val,NULL) Ignore, Unit)
-ML_1 (gtk_osxapplication_sync_menubar, GtkOSXApplication_val, Unit)
-ML_1 (gtk_osxapplication_use_quartz_accelerators, GtkOSXApplication_val, Val_bool)
-ML_0 (quartz_application_get_bundle_path, Val_string)
-ML_0 (quartz_application_get_resource_path, Val_string)
-ML_0 (quartz_application_get_executable_path, Val_string)
-ML_0 (quartz_application_get_bundle_id, Val_string)
-ML_1 (quartz_application_get_bundle_info, String_val, Val_string)
+ML_2 (gtkosx_application_attention_request, GtkosxApplication_val, Attention_type_val, Val_int)
+ML_2 (gtkosx_application_cancel_attention_request, GtkosxApplication_val, Int_val, Unit)
+ML_3 (gtkosx_application_insert_app_menu_item, GtkosxApplication_val, GtkWidget_val, Int_val, Unit)
+ML_1 (gtkosx_application_ready, GtkosxApplication_val, Unit)
+ML_2 (gtkosx_application_set_dock_icon_pixbuf, GtkosxApplication_val, GdkPixbuf_val, Unit)
+ML_4 (gtkosx_application_set_dock_icon_resource, GtkosxApplication_val, String_val, String_val, String_val, Unit)
+ML_2 (gtkosx_application_set_dock_menu, GtkosxApplication_val, GtkMenuShell_val, Unit)
+ML_2 (gtkosx_application_set_help_menu, GtkosxApplication_val, Option_val(arg2,GtkMenuItem_val,NULL) Ignore, Unit)
+ML_2 (gtkosx_application_set_menu_bar, GtkosxApplication_val, GtkMenuShell_val, Unit)
+ML_2 (gtkosx_application_set_use_quartz_accelerators, GtkosxApplication_val, Bool_val, Unit)
+ML_2 (gtkosx_application_set_window_menu, GtkosxApplication_val, Option_val(arg2,GtkMenuItem_val,NULL) Ignore, Unit)
+ML_1 (gtkosx_application_sync_menubar, GtkosxApplication_val, Unit)
+ML_1 (gtkosx_application_use_quartz_accelerators, GtkosxApplication_val, Val_bool)
+ML_0 (gtkosx_application_get, Val_gtkosxApplication)
+ML_0 (gtkosx_application_get_bundle_path, Val_string)
+ML_0 (gtkosx_application_get_resource_path, Val_string)
+ML_0 (gtkosx_application_get_executable_path, Val_string)
+ML_0 (gtkosx_application_get_bundle_id, Val_string)
+ML_1 (gtkosx_application_get_bundle_info, String_val, Val_string)

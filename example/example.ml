@@ -45,7 +45,7 @@ let drop_attention osx () =
 
 let () =
   let _ = GtkMain.Main.init () in
-  let osx = GOSXApplication.osxapplication () in
+  let osx = GosxApplication.osxapplication () in
   let window = GWindow.window ~title:"The example" ~width:300 ~height:200 () in
   let thebox = GPack.vbox ~packing:window#add () in
   let txt = GMisc.label ~text:"No info to show" ~packing:thebox#pack () in

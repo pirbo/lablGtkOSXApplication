@@ -1,4 +1,4 @@
-AC_INIT(lablgtkosx,1.02)
+AC_INIT(lablgtkosx,2.00)
 
 AC_PROG_CC
 
@@ -19,10 +19,10 @@ fi
 
 AC_CHECK_OCAML_PKG(lablgtk2)
 
-PKG_CHECK_MODULES([GTKOSX],gtk-mac-integration)
+PKG_CHECK_MODULES([GTKOSX],gtk-mac-integration >= 2.0.0)
 
 AC_COPYRIGHT([Pierre Boutillier 2012])
-AC_REVISION(1.02)
+AC_REVISION(2.00)
 
 AC_CONFIG_FILES([Makefile src/Makefile example/Info.plist META])
 AC_OUTPUT

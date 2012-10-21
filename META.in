@@ -1,4 +1,4 @@
-description = "Binding of GtkOSXApplication on top of LablGtk2"
+description = "Binding of GtkosxApplication on top of LablGtk2"
 requires = " @OCAML_PKG_lablgtk2@"
 version = "@PACKAGE_VERSION@"
 

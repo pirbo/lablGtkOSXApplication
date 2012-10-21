@@ -16,12 +16,12 @@
 (* Foundation, Inc., 51 Franklin Street, Fifth Floor, *)
 (* Boston, MA  02110-1301  USA *)
 
-class osx_application_signals :
-  [ `osxapplication ] Gobject.obj ->
+class osxapplication_signals :
+  [ `application ] Gobject.obj ->
   object
     method private connect :
       'a.
-        ([ `osxapplication ], 'a) GtkSignal.t -> callback:'a -> GtkSignal.id
+        ([ `application ], 'a) GtkSignal.t -> callback:'a -> GtkSignal.id
     method ns_application_block_termination :
       callback:(unit -> bool) -> GtkSignal.id
     method ns_application_did_become_active :
@@ -34,16 +34,15 @@ class osx_application_signals :
       callback:(unit -> unit) -> GtkSignal.id
   end
 class osxapplication :
-  [ `osxapplication ] Gobject.obj ->
+  [ `application ] Gobject.obj ->
   object
-    method as_osxapplication : [ `osxapplication ] Gobject.obj
+    method as_osxapplication : [ `application ] Gobject.obj
     method attention_request : GtkosxapplicationEnums.attention_type -> int
     method bundle_id : unit -> string
     method bundle_info : string -> string
     method bundle_path : unit -> string
     method cancel_attention_request : int -> unit
-    method cleanup : unit -> unit
-    method connect : osx_application_signals
+    method connect : osxapplication_signals
     method executable_path : unit -> string
     method insert_app_menu_item : GMenu.menu_item -> int -> unit
     method ready : unit -> unit

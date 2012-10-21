@@ -1,10 +1,10 @@
-prefix "Gtk"
+prefix "Gtkosx"
 
 header {
   open GtkosxapplicationEnums
 }
 
-class OSXApplication type "[ `osxapplication ] obj" wrap: GObject {
+class Application type "[ `application ] obj" wrap: GObject {
  "use_quartz_accelerators" gboolean : Read / Write
 
   signal NSApplicationBlockTermination : -> bool
@@ -15,7 +15,12 @@ class OSXApplication type "[ `osxapplication ] obj" wrap: GObject {
 
   method attention_request : "attention_type -> int"
   method cancel_attention_request : "int -> unit"
-  method cleanup
+(*  method get : "[ `application ] obj"
+  method get_bundle_id : "string"
+  method get_bundle_info : "string -> string"
+  method get_bundle_path : "string"
+  method get executable_path : "string"
+  method get_resource_path : "string" *)
   method insert_app_menu_item : "Gtk.widget obj -> int -> unit"
   method ready
   method set_dock_icon_pixbuf : "GdkPixbuf.pixbuf -> unit"
