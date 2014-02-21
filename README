@@ -7,7 +7,7 @@ It has been done using
  - Ocaml 4.0
  - findlib 1.33
  - lablgtk2 2.16.0
- - gtk-osx-integration 2.0.0 (build by jhbuild)
+ - gtk-osx-integration 2.0.6 (build by jhbuild)
 
 The configure generation involves
  - ocaml-autoconf 1.1

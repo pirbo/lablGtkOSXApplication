@@ -1,4 +1,4 @@
-AC_INIT(lablgtkosx,2.00)
+AC_INIT(lablgtkosx,2.01)
 
 AC_PROG_CC
 
@@ -19,7 +19,7 @@ fi
 
 AC_CHECK_OCAML_PKG(lablgtk2)
 
-PKG_CHECK_MODULES([GTKOSX],gtk-mac-integration >= 2.0.0)
+PKG_CHECK_MODULES([GTKOSX],gtk-mac-integration-gtk2 >= 2.0.0)
 
 AC_COPYRIGHT([Pierre Boutillier 2012])
 AC_REVISION(2.00)

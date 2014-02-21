@@ -20,7 +20,7 @@
 #include <wrappers.h>
 #include <ml_gobject.h>
 #include <ml_gdkpixbuf.h>
-#include <gtkmacintegration/gtkosxapplication.h>
+#include <gtkosxapplication.h>
 
 // Copy/Paste of lablgtk2.14.2 that should be avoided
 #define GtkWidget_val(val) check_cast(GTK_WIDGET,val)
